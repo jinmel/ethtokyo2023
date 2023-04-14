@@ -85,16 +85,15 @@ for key in state_dict:
 
 # pipeline = pipeline.to("cuda")
 pipeline.safety_checker = lambda images, clip_input: (images, False)
-pipeline.save_pretrained()
 
-# prompt = '1boy, wanostyle, monkey d luffy, smiling, straw hat, looking at viewer, solo, upper body, ((masterpiece)), (best quality), (extremely detailed), depth of field, sketch, dark intense shadows, sharp focus, soft lighting, hdr, colorful, good composition, fire all around, spectacular, <lora:wanostyle_2_offset:1>, closed shirt, anime screencap, scar under eye, ready to fight, black eyes'
-# negative_prompt = '(painting by bad-artist-anime:0.9), (painting by bad-artist:0.9), watermark, text, error, blurry, jpeg artifacts, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, artist name, (worst quality, low quality:1.4), bad anatomy, watermark, signature, text, logo'
+prompt = '1boy, wanostyle, monkey d luffy, smiling, straw hat, looking at viewer, solo, upper body, ((masterpiece)), (best quality), (extremely detailed), depth of field, sketch, dark intense shadows, sharp focus, soft lighting, hdr, colorful, good composition, fire all around, spectacular, <lora:wanostyle_2_offset:1>, closed shirt, anime screencap, scar under eye, ready to fight, black eyes'
+negative_prompt = '(painting by bad-artist-anime:0.9), (painting by bad-artist:0.9), watermark, text, error, blurry, jpeg artifacts, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, artist name, (worst quality, low quality:1.4), bad anatomy, watermark, signature, text, logo'
 
-# with torch.no_grad():
-#     image = pipeline(prompt=prompt,
-#                      height=1280,
-#                      width=720,
-#                      num_inference_steps=50,
-#                      guidance_scale=8).images[0]
+with torch.no_grad():
+    image = pipeline(prompt=prompt,
+                     height=1280,
+                     width=720,
+                     num_inference_steps=50,
+                     guidance_scale=8).images[0]
 
-# image.save("./{}_{}.png".format(prompt[:50],alpha))
+image.save("./{}_{}.png".format(prompt[:50],alpha))

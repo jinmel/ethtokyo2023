@@ -1,11 +1,12 @@
+"""Converts safetensor lora to diffusers."""
 import os
 
 from absl import app
 from absl import flags
 from absl import logging
 import safetensors.torch
-
 from diffusers import StableDiffusionPipeline
+from diffusers import DPMSolverMultistepScheduler
 import torch
 
 
@@ -15,6 +16,7 @@ flags.DEFINE_string('diffuser', None, 'Name of diffuser.')
 flags.DEFINE_string('lora', None, 'Path to the safetensor lora model.')
 flags.DEFINE_string('output_dir', None,
                     'Output directory of lora fused diffuser.')
+flags.DEFINE_float('alpha', None, 'Alpha value - weight of lora in diffuser.')
 
 LORA_PREFIX_UNET = 'lora_unet'
 LORA_PREFIX_TEXT_ENCODER = 'lora_te'
@@ -82,9 +84,16 @@ def load_lora_weights(pipeline, state_dict, alpha=0.75):
 def main(_):
     pipeline = StableDiffusionPipeline.from_pretrained(
             FLAGS.diffuser, torch_dtype=torch.float32)
+    pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
     logging.info('Loaded diffuser pipeline from %s', FLAGS.diffuser)
     lora_state_dict = safetensors.torch.load_file(FLAGS.lora)
     load_lora_weights(pipeline, lora_state_dict)
+    logging.info('Loaded lora weights from %s', FLAGS.lora)
+
+    os.makedirs(FLAGS.output_dir, exist_ok=True)
+
+    pipeline.save_pretrained(FLAGS.output_dir)
+    logging.info('Saved to %s', FLAGS.output_dir)
 
 
 if __name__ == '__main__':
