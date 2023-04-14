@@ -1,0 +1,33 @@
+.collection-container {
+  display: grid;
+  gap: 25px;
+  margin-top: 15vh;
+
+  .collection-name {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .collection-mint-btn {
+    grid-row: 1;
+    grid-column: 3 / span 2;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .nft-images-container {
+    grid-row: 2;
+    grid-column: 1 / span 4;
+    align-self: center;
+    justify-self: center;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+  }
+}

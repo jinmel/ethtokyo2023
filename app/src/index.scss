@@ -1,0 +1,27 @@
+:root {
+  --highlight: #5f45ff;
+}
+
+body {
+  background-color: #2b2b30;
+  color: #fdfdfd;
+  margin: 0;
+  font-family: 'Asap Condensed', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+button {
+  background-color: var(--highlight);
+  border-radius: 5px;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 2px;
+  font-size: 20px;
+}
