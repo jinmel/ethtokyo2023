@@ -1,3 +1,0 @@
-[submodule "contracts/core"]
-	path = contracts/core
-	url = git@github.com:lens-protocol/core.git
