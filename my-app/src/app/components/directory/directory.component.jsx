@@ -5,9 +5,12 @@ import { useWalletLogin } from '@lens-protocol/react-web';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { useWalletLogout, useActiveWallet } from '@lens-protocol/react-web';
-import { useActiveProfile } from '@lens-protocol/react-web';
 import { WhenLoggedInWithProfile } from '../WhenLoggedInWithProfile';
 import { PostForm } from '../PostForm';
+import { profileId, usePublications } from '@lens-protocol/react-web';
+import { useActiveProfile } from '@lens-protocol/react-web';
+
+const demoProfileId = '0x01c71a';
 
 function MyProfile() {
   const { data, error, loading } = useActiveProfile();
@@ -89,6 +92,22 @@ function WalletStatus() {
   }
 }
 
+function Publications() {
+  const {
+    data: publication,
+    loading,
+    hasMore,
+    next,
+  } = usePublications({
+    profileId: demoProfileId,
+    limit: 10,
+  });
+
+  console.log(publication);
+
+  return <div></div>;
+}
+
 const Directory = ({ collections }) => {
   return (
     <div>
@@ -104,6 +123,7 @@ const Directory = ({ collections }) => {
         )}
       </WhenLoggedInWithProfile>
       <div className="collection-directory-container">
+        <Publications />
         {collections.map((collection, index) => {
           return (
             <Link to={`/collection/${collection.id}`}>

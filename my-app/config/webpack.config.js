@@ -564,7 +564,7 @@ module.exports = function (webpackEnv) {
       ].filter(Boolean),
     },
     plugins: [
-      new NodePolyfillPlugin(),
+      new NodePolyfillPlugin({ excludeAliases: ['console'] }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

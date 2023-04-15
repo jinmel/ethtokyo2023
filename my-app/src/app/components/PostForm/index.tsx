@@ -16,10 +16,11 @@ export function PostForm({ publisher }: PostComposerProps) {
     const form = event.currentTarget;
 
     const formData = new FormData(form);
-    const content = (formData.get('content') as string | null) ?? never();
-
+    const content = (formData.get('name') as string | null) ?? never();
+    const image = (formData.get('image') as string | null) ?? never();
+    const endpoint = (formData.get('endpoint') as string | null) ?? never();
     await create({
-      content,
+      content: content,
       contentFocus: ContentFocus.TEXT,
       locale: 'en',
     });
@@ -30,9 +31,12 @@ export function PostForm({ publisher }: PostComposerProps) {
   return (
     <form onSubmit={submit}>
       <fieldset>
+        <h2> name </h2>
         <input type="text" name="name"/>
+        <h2> image </h2>
         <input type="text" name="image"/>
-        <input type="text" name="endpoint"/>
+        <h2> endpoint </h2>
+        <input type="text" name="endpoint" value="https://api.runpod.ai/v1/stable-diffusion-v1/run"/>
         <button type="submit" disabled={isPending}>
           Post
         </button>

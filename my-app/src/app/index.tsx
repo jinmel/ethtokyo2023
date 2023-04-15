@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 const collections = [
   {
     id: 1,
-    name: 'Pokemon',
+    name: 'Fakemon',
     images: [
       'https://i.ibb.co/dpGdj3b/216947.png',
       'https://i.ibb.co/BKddQYG/216949.png',

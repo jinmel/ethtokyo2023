@@ -18,7 +18,7 @@ const Collection = ({ collections }) => {
       <h1 className="collection-name">{collection[0].name}</h1>
       <div className="collection-mint-btn">
         <Link to={`/collection/${collectionId}/mint`}>
-          <button>Mint</button>
+          <button>Generate Image</button>
         </Link>
       </div>
       <div className="nft-images-container">
