@@ -9,7 +9,6 @@ import { useActiveProfile } from '@lens-protocol/react-web';
 import { WhenLoggedInWithProfile } from '../WhenLoggedInWithProfile';
 import { PostForm } from '../PostForm';
 
-
 function MyProfile() {
   const { data, error, loading } = useActiveProfile();
 
